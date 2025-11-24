@@ -279,6 +279,42 @@ form button:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,.3);
     z-index: 2000;
 }
+/* --- Ajustes PARA CELULAR --- */
+@media (max-width: 768px) {
+
+    .hero {
+        flex-direction: column;      /* pasa la figura abajo */
+        text-align: center;
+        height: auto;
+        padding: 120px 5% 60px 5%;
+        gap: 40px;
+    }
+
+    .hero-figure {
+        width: 200px;                /* más pequeño */
+        height: 200px;
+        margin-top: 10px;
+        order: 2;                    /* asegura que vaya debajo */
+    }
+
+    .hero-text {
+        order: 1;
+    }
+
+    .hero-text h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .btn-main {
+        margin-top: 15px;
+        font-size: 1rem;
+        padding: 12px 22px;
+    }
+}
 
 </style>
 </head>
