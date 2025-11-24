@@ -71,6 +71,51 @@ nav a:hover {
     overflow: hidden;
 }
 
+/* --- Respiración cuadrada: Caja de texto --- */
+.breathing-box {
+    position: absolute;
+    top: 65%;
+    left: 5%;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 15px 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    backdrop-filter: blur(4px);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--morado);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: 0.4s ease;
+}
+
+.hero:hover .breathing-box {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* animación texto */
+@keyframes fadeText {
+    0% {opacity: 0; transform: translateY(10px);}
+    100% {opacity: 1; transform: translateY(0);}
+}
+
+.breath-step {
+    animation: fadeText .6s ease;
+}
+
+/* Ajustes móviles respiración */
+@media (max-width: 768px) {
+    .breathing-box {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 80%;
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+}
+
 .hero-text {
     max-width: 500px;
 }
@@ -104,7 +149,7 @@ nav a:hover {
     background: var(--rosa);
 }
 
-/* OBJETO ABSTRACTO */
+/* Figura abstracta */
 .hero-figure {
     width: 380px;
     height: 380px;
@@ -119,9 +164,7 @@ nav a:hover {
 }
 
 /* ------------------ SECCIONES ------------------ */
-section {
-    padding: 90px 10%;
-}
+section { padding: 90px 10%; }
 
 /* ------------------ TITULO ------------------ */
 .title {
@@ -132,7 +175,7 @@ section {
     margin-bottom: 50px;
 }
 
-/* ------------------ CARDS MODERNAS ------------------ */
+/* ------------------ CARDS ------------------ */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -155,15 +198,8 @@ section {
     opacity: 1;
 }
 
-.card h3 {
-    font-size: 1.4rem;
-    color: var(--morado);
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #555;
-}
+.card h3 { font-size: 1.4rem; color: var(--morado); margin-bottom: 10px; }
+.card p { color: #555; }
 
 /* ------------------ SOBRE MI ------------------ */
 .about {
@@ -180,9 +216,7 @@ section {
     box-shadow: 0 6px 20px rgba(0,0,0,.1);
 }
 
-.about-text {
-    max-width: 500px;
-}
+.about-text { max-width: 500px; }
 
 /* ------------------ CONTACTO ------------------ */
 form {
@@ -233,9 +267,7 @@ form button {
     transition: .3s;
 }
 
-form button:hover {
-    background: var(--rosa);
-}
+form button:hover { background: var(--rosa); }
 
 .btn-loading {
     pointer-events: none;
@@ -257,8 +289,35 @@ form button:hover {
     animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin {
-    to { transform: translateY(-50%) rotate(360deg); }
+@keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+/* --- Ajustes PARA CELULAR --- */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 120px 5% 60px 5%;
+        gap: 40px;
+    }
+
+    .hero-figure {
+        width: 200px;
+        height: 200px;
+        margin-top: 10px;
+        order: 2;
+    }
+
+    .hero-text { order: 1; }
+
+    .hero-text h1 { font-size: 2.4rem; }
+    .hero-text p { font-size: 1rem; }
+
+    .btn-main {
+        margin-top: 15px;
+        font-size: 1rem;
+        padding: 12px 22px;
+    }
 }
 
 /* WHATSAPP */
@@ -279,42 +338,6 @@ form button:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,.3);
     z-index: 2000;
 }
-/* --- Ajustes PARA CELULAR --- */
-@media (max-width: 768px) {
-
-    .hero {
-        flex-direction: column;      /* pasa la figura abajo */
-        text-align: center;
-        height: auto;
-        padding: 120px 5% 60px 5%;
-        gap: 40px;
-    }
-
-    .hero-figure {
-        width: 200px;                /* más pequeño */
-        height: 200px;
-        margin-top: 10px;
-        order: 2;                    /* asegura que vaya debajo */
-    }
-
-    .hero-text {
-        order: 1;
-    }
-
-    .hero-text h1 {
-        font-size: 2.4rem;
-    }
-
-    .hero-text p {
-        font-size: 1rem;
-    }
-
-    .btn-main {
-        margin-top: 15px;
-        font-size: 1rem;
-        padding: 12px 22px;
-    }
-}
 
 </style>
 </head>
@@ -332,13 +355,21 @@ form button:hover {
 
 <!-- HERO -->
 <div class="hero">
+
     <div class="hero-text">
         <h1>Psicólogo Aparicio Armando</h1>
         <p>Ayudo a niños, adolescentes y adultos a desarrollar bienestar emocional, habilidades de aprendizaje y seguridad personal.</p>
+
         <button class="btn-main" onclick="document.querySelector('#contacto').scrollIntoView()">Agenda tu sesión</button>
     </div>
 
     <div class="hero-figure"></div>
+
+    <!-- BLOQUE DE RESPIRACIÓN CUADRADA -->
+    <div class="breathing-box" id="breathingBox">
+        <div class="breath-step" id="breathStep">Respiración cuadrada</div>
+    </div>
+
 </div>
 
 <!-- SERVICIOS -->
@@ -424,7 +455,7 @@ form button:hover {
 </div>
 
 <script>
-// Animación de tarjetas al hacer scroll
+/* --- Mostrar tarjetas al hacer scroll --- */
 const cards = document.querySelectorAll(".card");
 function showCards() {
     const trigger = window.innerHeight * 0.85;
@@ -437,9 +468,8 @@ function showCards() {
 window.addEventListener("scroll", showCards);
 window.addEventListener("load", showCards);
 
-// VALIDACIÓN EN TIEMPO REAL
+/* --- Validación en vivo --- */
 const inputs = document.querySelectorAll("#contactForm input, #contactForm textarea");
-
 inputs.forEach(input => {
     input.addEventListener("input", () => {
         const msg = input.parentElement.querySelector(".msg");
@@ -456,7 +486,7 @@ inputs.forEach(input => {
     });
 });
 
-// ANIMACIÓN AL ENVIAR MENSAJE
+/* --- Animación al enviar --- */
 const form = document.getElementById("contactForm");
 const btnEnviar = document.getElementById("btnEnviar");
 
@@ -469,7 +499,7 @@ form.addEventListener("submit", () => {
     }, 1500);
 });
 
-// WHATSAPP
+/* --- Enviar por WhatsApp --- */
 document.getElementById("btnWhatsApp").addEventListener("click", () => {
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
@@ -481,10 +511,47 @@ document.getElementById("btnWhatsApp").addEventListener("click", () => {
 
     window.open("https://wa.me/51997113824?text=" + texto, "_blank");
 });
+
+/* --- Respiración Cuadrada: Secuencia --- */
+const breathTexts = [
+    "Inhala 4 segundos",
+    "Retén 4 segundos",
+    "Exhala 4 segundos",
+    "Retén 4 segundos"
+];
+
+let step = 0;
+const breathBox = document.getElementById("breathingBox");
+const breathStep = document.getElementById("breathStep");
+
+document.querySelector(".hero").addEventListener("mouseenter", () => {
+    step = 0;
+    cycleBreathing();
+});
+
+function cycleBreathing() {
+    breathStep.textContent = breathTexts[step];
+    breathStep.style.animation = "fadeText .6s ease";
+
+    step = (step + 1) % breathTexts.length;
+
+    setTimeout(() => {
+        breathStep.style.animation = "none";
+        cycleBreathing();
+    }, 2000);
+}
+
+// En móvil: tocar activa la secuencia
+document.querySelector(".hero").addEventListener("click", () => {
+    step = 0;
+    cycleBreathing();
+});
+
 </script>
- <footer style="background:#222;color:#fff;padding:20px 0;text-align:center;position:fixed;width:100%;bottom:0;left:0;">
-        Celular: 997113824 / apariciocch@gmail.com
-    </footer>
+
+<footer style="background:#222;color:#fff;padding:20px 0;text-align:center;position:fixed;width:100%;bottom:0;left:0;">
+    Celular: 997113824 / apariciocch@gmail.com
+</footer>
 
 </body>
 </html>
