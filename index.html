@@ -1,414 +1,448 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Psicólogo Aparicio Armando</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* ------------------ PALETA ------------------ */
-        :root {
-            --azul: #3A7DFF;
-            --morado: #4000f1;
-            --amarillo: #FFC400;
-            --rosa: #FF6584;
-            --verde: #4CD1A1;
-            --texto: #212121;
-            --fondo: #FAFAFA;
-            --blanco: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psicólogo Aparicio Armando</title>
 
-        /* ------------------ BASE ------------------ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--fondo);
-            color: var(--texto);
-            overflow-x: hidden;
-        }
+<style>
+/* ------------------ PALETA ------------------ */
+:root {
+    --azul: #3A7DFF;
+    --morado: #4000f1;
+    --amarillo: #FFC400;
+    --rosa: #FF6584;
+    --verde: #4CD1A1;
+    --texto: #212121;
+    --fondo: #FAFAFA;
+    --blanco: #ffffff;
+}
 
-        /* ------------------ NAV ------------------ */
-        nav {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            padding: 18px 0;
-            background: rgba(255, 255, 255, .8);
-            backdrop-filter: blur(6px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
-            z-index: 999;
-        }
+/* ------------------ BASE ------------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    overflow-x: hidden;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 45px;
-        }
+/* ------------------ NAV ------------------ */
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding: 18px 0;
+    background: rgba(255,255,255,.8);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    z-index: 999;
+}
 
-        nav a {
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            color: var(--morado);
-            transition: .3s;
-        }
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+}
 
-        nav a:hover {
-            color: var(--rosa);
-        }
+nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--morado);
+    transition: .3s;
+}
 
-        /* ------------------ HERO ------------------ */
-        .hero {
-            height: 95vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 8%;
-            background: var(--blanco);
-            overflow: hidden;
-        }
+nav a:hover {
+    color: var(--rosa);
+}
 
-        .hero-text {
-            max-width: 500px;
-        }
+/* ------------------ HERO ------------------ */
+.hero {
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    background: var(--blanco);
+    overflow: hidden;
+}
 
-        .hero-text h1 {
-            font-size: 3.4rem;
-            font-weight: 800;
-            color: var(--morado);
-        }
+.hero-text {
+    max-width: 500px;
+}
 
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-            color: #555;
-        }
+.hero-text h1 {
+    font-size: 3.4rem;
+    font-weight: 800;
+    color: var(--morado);
+}
 
-        .btn-main {
-            margin-top: 25px;
-            background: var(--azul);
-            padding: 14px 28px;
-            border-radius: 14px;
-            color: white;
-            border: none;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: .3s;
-        }
+.hero-text p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #555;
+}
 
-        .btn-main:hover {
-            background: var(--rosa);
-        }
+.btn-main {
+    margin-top: 25px;
+    background: var(--azul);
+    padding: 14px 28px;
+    border-radius: 14px;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+}
 
-        /* OBJETO ABSTRACTO */
-        .hero-figure {
-            width: 380px;
-            height: 380px;
-            background: linear-gradient(135deg, var(--morado), var(--azul));
-            border-radius: 58% 42% 55% 45%;
-            animation: morph 3.5s infinite ease-in-out alternate;
-        }
+.btn-main:hover {
+    background: var(--rosa);
+}
 
-        @keyframes morph {
-            0% {
-                border-radius: 58% 42% 55% 45%;
-                transform: scale(1);
-            }
+/* OBJETO ABSTRACTO */
+.hero-figure {
+    width: 380px;
+    height: 380px;
+    background: linear-gradient(135deg, var(--morado), var(--azul));
+    border-radius: 58% 42% 55% 45%;
+    animation: morph 3.5s infinite ease-in-out alternate;
+}
 
-            100% {
-                border-radius: 48% 52% 45% 55%;
-                transform: scale(1.04);
-            }
-        }
+@keyframes morph {
+    0% { border-radius: 58% 42% 55% 45%; transform: scale(1); }
+    100% { border-radius: 48% 52% 45% 55%; transform: scale(1.04); }
+}
 
-        /* ------------------ SECCIONES ------------------ */
-        section {
-            padding: 90px 10%;
-        }
+/* ------------------ SECCIONES ------------------ */
+section {
+    padding: 90px 10%;
+}
 
-        /* ------------------ TITULO ------------------ */
-        .title {
-            text-align: center;
-            font-size: 2.3rem;
-            font-weight: 700;
-            color: var(--azul);
-            margin-bottom: 50px;
-        }
+/* ------------------ TITULO ------------------ */
+.title {
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: 50px;
+}
 
-        /* ------------------ CARDS MODERNAS ------------------ */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 35px;
-        }
+/* ------------------ CARDS MODERNAS ------------------ */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+}
 
-        .card {
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
-            border-left: 6px solid var(--morado);
-            transform: translateY(40px);
-            opacity: 0;
-            transition: .6s ease;
-        }
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.08);
+    border-left: 6px solid var(--morado);
+    transform: translateY(40px);
+    opacity: 0;
+    transition: .6s ease;
+}
 
-        .card.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
+.card.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
 
-        .card h3 {
-            font-size: 1.4rem;
-            color: var(--morado);
-            margin-bottom: 10px;
-        }
+.card h3 {
+    font-size: 1.4rem;
+    color: var(--morado);
+    margin-bottom: 10px;
+}
 
-        .card p {
-            color: #555;
-        }
+.card p {
+    color: #555;
+}
 
-        /* ------------------ SOBRE MI ------------------ */
-        .about {
-            display: flex;
-            gap: 50px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+/* ------------------ SOBRE MI ------------------ */
+.about {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-        .about img {
-            width: 330px;
-            border-radius: 18px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
-        }
+.about img {
+    width: 330px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.1);
+}
 
-        .about-text {
-            max-width: 500px;
-        }
+.about-text {
+    max-width: 500px;
+}
 
-        /* ------------------ CONTACTO ------------------ */
-        form {
-            max-width: 600px;
-            margin: auto;
-            background: var(--blanco);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
-        }
+/* ------------------ CONTACTO ------------------ */
+form {
+    max-width: 600px;
+    margin: auto;
+    background: var(--blanco);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(0,0,0,.08);
+}
 
-        .field input.valid,
-        .field textarea.valid {
-            border-color: #4CD1A1;
-        }
+.field input.valid,
+.field textarea.valid {
+    border-color: #4CD1A1;
+}
+.field input.invalid,
+.field textarea.invalid {
+    border-color: #FF6584;
+}
 
-        .field input.invalid,
-        .field textarea.invalid {
-            border-color: #FF6584;
-        }
+.field .msg {
+    font-size: 0.85rem;
+    margin-top: 4px;
+    height: 16px;
+    color: #FF6584;
+}
 
-        .field .msg {
-            font-size: 0.85rem;
-            margin-top: 4px;
-            height: 16px;
-            color: #FF6584;
-        }
+form input, form textarea {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    transition: .3s;
+}
 
-        form input,
-        form textarea {
-            width: 100%;
-            padding: 14px;
-            font-size: 1rem;
-            margin-bottom: 5px;
-            border-radius: 12px;
-            border: 2px solid #ddd;
-            transition: .3s;
-        }
+form button {
+    width: 100%;
+    padding: 14px;
+    background: var(--morado);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
 
-        form button {
-            width: 100%;
-            padding: 14px;
-            background: var(--morado);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .3s;
-        }
+form button:hover {
+    background: var(--rosa);
+}
 
-        form button:hover {
-            background: var(--rosa);
-        }
+.btn-loading {
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+}
 
-        .btn-loading {
-            pointer-events: none;
-            opacity: 0.7;
-            position: relative;
-        }
+.btn-loading::after {
+    content: "";
+    width: 18px;
+    height: 18px;
+    border: 3px solid #fff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 0.8s linear infinite;
+}
 
-        .btn-loading::after {
-            content: "";
-            width: 18px;
-            height: 18px;
-            border: 3px solid #fff;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: spin 0.8s linear infinite;
-        }
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
+}
 
-        @keyframes spin {
-            to {
-                transform: translateY(-50%) rotate(360deg);
-            }
-        }
+/* WHATSAPP */
+.whatsapp {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+    z-index: 2000;
+}
 
-        /* WHATSAPP */
-        .whatsapp {
-            position: fixed;
-            right: 25px;
-            bottom: 25px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 32px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
-            z-index: 2000;
-        }
-
-        /* --- Ajustes PARA CELULAR --- */
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                /* pasa la figura abajo */
-                text-align: center;
-                height: auto;
-                padding: 120px 5% 60px 5%;
-                gap: 40px;
-            }
-
-            .hero-figure {
-                width: 200px;
-                /* más pequeño */
-                height: 200px;
-                margin-top: 10px;
-                order: 2;
-                /* asegura que vaya debajo */
-            }
-
-            .hero-text {
-                order: 1;
-            }
-
-            .hero-text h1 {
-                font-size: 2.4rem;
-            }
-
-            .hero-text p {
-                font-size: 1rem;
-            }
-
-            .btn-main {
-                margin-top: 15px;
-                font-size: 1rem;
-                padding: 12px 22px;
-            }
-        }
-    </style>
+</style>
 </head>
 
-<body> <!-- NAV -->
-    <nav>
-        <ul>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#sobre">Sobre mí</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </nav> <!-- HERO -->
-    <div class="hero">
-        <div class="hero-text">
-            <h1>Psicólogo Aparicio Armando</h1>
-            <p>Ayudo a niños, adolescentes y adultos a desarrollar bienestar emocional, habilidades de aprendizaje y
-                seguridad personal.</p> <button class="btn-main"
-                onclick="document.querySelector('#contacto').scrollIntoView()">Agenda tu sesión</button>
-        </div>
-        <div class="hero-figure"></div>
-    </div> <!-- SERVICIOS -->
-    <section id="servicios">
-        <h2 class="title">Servicios</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>Evaluación Psicopedagógica</h3>
-                <p>Identifico dificultades y fortalezas en aprendizaje, conducta y procesos emocionales.</p>
-            </div>
-            <div class="card">
-                <h3>Terapia Emocional</h3>
-                <p>Trabajo con ansiedad, autoestima, impulsividad, hábitos y regulación emocional.</p>
-            </div>
-            <div class="card">
-                <h3>Intervención en Escritura</h3>
-                <p>Abordaje profesional para disgrafía, motricidad fina y planificación del trazo.</p>
-            </div>
-            <div class="card">
-                <h3>Acompañamiento Familiar</h3>
-                <p>Guía a padres para mejorar la convivencia y el rendimiento académico.</p>
-            </div>
-        </div>
-    </section> <!-- SOBRE MI -->
-    <section id="sobre">
-        <h2 class="title">Sobre mí</h2>
-        <div class="about"> <img src="apa.jpg" alt="Foto">
-            <div class="about-text">
-                <p><strong>Soy Aparicio Armando</strong>, psicólogo especializado en aprendizaje, conducta y bienestar.
-                </p>
-                <p>Trabajo con un enfoque humano, moderno y basado en evidencia, acompañando a cada persona según sus
-                    necesidades.</p>
-            </div>
-        </div>
-    </section> <!-- CONTACTO -->
-    <section id="contacto">
-        <h2 class="title">Contacto</h2>
-        <form id="contactForm" action="https://formsubmit.co/apariciocch@gmail.com" method="POST">
-            <div class="field"> <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" required> <small
-                    class="msg"></small> </div>
-            <div class="field"> <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required>
-                <small class="msg"></small> </div>
-            <div class="field"> <textarea name="mensaje" id="mensaje" rows="5" placeholder="Tu mensaje"
-                    required></textarea> <small class="msg"></small> </div> <!-- CONFIGURACIONES OCULTAS --> <input
-                type="hidden" name="_subject" value="Nuevo mensaje desde tu página web"> <input type="hidden"
-                name="_captcha" value="false"> <input type="hidden" name="_next"
-                value="https://aparicio-armando.onrender.com"> <button type="submit" id="btnEnviar">Enviar
-                Mensaje</button> <a id="btnWhatsApp"
-                style="display:block; margin-top:15px; text-align:center; font-size:1rem; color:white; background:#25D366; padding:12px; border-radius:10px; font-weight:600; cursor:pointer;">
-                Enviar por WhatsApp </a>
-        </form>
-    </section> <!-- WHATSAPP -->
-    <div class="whatsapp" onclick="window.open('https://wa.me/51997113824','_blank')"> <img
-            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"
-            style="width:32px; height:32px;"> </div>
-    <script> // Animación de tarjetas al hacer scroll const cards = document.querySelectorAll(".card"); function showCards() { const trigger = window.innerHeight * 0.85; cards.forEach(card => { if (card.getBoundingClientRect().top < trigger) { card.classList.add("visible"); } }); } window.addEventListener("scroll", showCards); window.addEventListener("load", showCards); // VALIDACIÓN EN TIEMPO REAL const inputs = document.querySelectorAll("#contactForm input, #contactForm textarea"); inputs.forEach(input => { input.addEventListener("input", () => { const msg = input.parentElement.querySelector(".msg"); if (input.checkValidity()) { input.classList.remove("invalid"); input.classList.add("valid"); msg.textContent = ""; } else { input.classList.remove("valid"); input.classList.add("invalid"); msg.textContent = "Campo inválido"; } }); }); // ANIMACIÓN AL ENVIAR MENSAJE const form = document.getElementById("contactForm"); const btnEnviar = document.getElementById("btnEnviar"); form.addEventListener("submit", () => { btnEnviar.classList.add("btn-loading"); btnEnviar.textContent = "Enviando..."; setTimeout(() => { btnEnviar.textContent = "Mensaje enviado ✓"; }, 1500); }); // WHATSAPP document.getElementById("btnWhatsApp").addEventListener("click", () => { const nombre = document.getElementById("nombre").value; const correo = document.getElementById("correo").value; const mensaje = document.getElementById("mensaje").value; const texto = encodeURIComponent( Hola, soy ${nombre}.\nCorreo: ${correo}\n\nMensaje:\n${mensaje} ); window.open("https://wa.me/51997113824?text=" + texto, "_blank"); }); </script>
-    <footer
-        style="background:#222;color:#fff;padding:20px 0;text-align:center;position:fixed;width:100%;bottom:0;left:0;">
-        Celular: 997113824 / apariciocch@gmail.com </footer>
-</body>
+<body>
 
+<!-- NAV -->
+<nav>
+    <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#sobre">Sobre mí</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-text">
+        <h1>Psicólogo Aparicio Armando</h1>
+        <p>Ayudo a niños, adolescentes y adultos a desarrollar bienestar emocional, habilidades de aprendizaje y seguridad personal.</p>
+        <button class="btn-main" onclick="document.querySelector('#contacto').scrollIntoView()">Agenda tu sesión</button>
+    </div>
+
+    <div class="hero-figure"></div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+    <h2 class="title">Servicios</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Evaluación Psicopedagógica</h3>
+            <p>Identifico dificultades y fortalezas en aprendizaje, conducta y procesos emocionales.</p>
+        </div>
+
+        <div class="card">
+            <h3>Terapia Emocional</h3>
+            <p>Trabajo con ansiedad, autoestima, impulsividad, hábitos y regulación emocional.</p>
+        </div>
+
+        <div class="card">
+            <h3>Intervención en Escritura</h3>
+            <p>Abordaje profesional para disgrafía, motricidad fina y planificación del trazo.</p>
+        </div>
+
+        <div class="card">
+            <h3>Acompañamiento Familiar</h3>
+            <p>Guía a padres para mejorar la convivencia y el rendimiento académico.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE MI -->
+<section id="sobre">
+    <h2 class="title">Sobre mí</h2>
+
+    <div class="about">
+        <img src="apa.jpg" alt="Foto">
+        <div class="about-text">
+            <p><strong>Soy Aparicio Armando</strong>, psicólogo especializado en aprendizaje, conducta y bienestar.</p>
+            <p>Trabajo con un enfoque humano, moderno y basado en evidencia, acompañando a cada persona según sus necesidades.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <h2 class="title">Contacto</h2>
+
+    <form id="contactForm" action="https://formsubmit.co/apariciocch@gmail.com" method="POST">
+
+        <div class="field">
+            <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" required>
+            <small class="msg"></small>
+        </div>
+
+        <div class="field">
+            <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required>
+            <small class="msg"></small>
+        </div>
+
+        <div class="field">
+            <textarea name="mensaje" id="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
+            <small class="msg"></small>
+        </div>
+
+        <!-- CONFIGURACIONES OCULTAS -->
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde tu página web">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://apariciocchhell.onrender.com">
+
+        <button type="submit" id="btnEnviar">Enviar Mensaje</button>
+
+        <a id="btnWhatsApp" 
+           style="display:block; margin-top:15px; text-align:center; font-size:1rem; color:white;
+                  background:#25D366; padding:12px; border-radius:10px; font-weight:600; cursor:pointer;">
+            Enviar por WhatsApp
+        </a>
+    </form>
+</section>
+
+<!-- WHATSAPP -->
+<div class="whatsapp" onclick="window.open('https://wa.me/51997113824','_blank')">💬</div>
+
+<script>
+// Animación de tarjetas al hacer scroll
+const cards = document.querySelectorAll(".card");
+function showCards() {
+    const trigger = window.innerHeight * 0.85;
+    cards.forEach(card => {
+        if (card.getBoundingClientRect().top < trigger) {
+            card.classList.add("visible");
+        }
+    });
+}
+window.addEventListener("scroll", showCards);
+window.addEventListener("load", showCards);
+
+// VALIDACIÓN EN TIEMPO REAL
+const inputs = document.querySelectorAll("#contactForm input, #contactForm textarea");
+
+inputs.forEach(input => {
+    input.addEventListener("input", () => {
+        const msg = input.parentElement.querySelector(".msg");
+
+        if (input.checkValidity()) {
+            input.classList.remove("invalid");
+            input.classList.add("valid");
+            msg.textContent = "";
+        } else {
+            input.classList.remove("valid");
+            input.classList.add("invalid");
+            msg.textContent = "Campo inválido";
+        }
+    });
+});
+
+// ANIMACIÓN AL ENVIAR MENSAJE
+const form = document.getElementById("contactForm");
+const btnEnviar = document.getElementById("btnEnviar");
+
+form.addEventListener("submit", () => {
+    btnEnviar.classList.add("btn-loading");
+    btnEnviar.textContent = "Enviando...";
+
+    setTimeout(() => {
+        btnEnviar.textContent = "Mensaje enviado ✓";
+    }, 1500);
+});
+
+// WHATSAPP
+document.getElementById("btnWhatsApp").addEventListener("click", () => {
+    const nombre = document.getElementById("nombre").value;
+    const correo = document.getElementById("correo").value;
+    const mensaje = document.getElementById("mensaje").value;
+
+    const texto = encodeURIComponent(
+        `Hola, soy ${nombre}.\nCorreo: ${correo}\n\nMensaje:\n${mensaje}`
+    );
+
+    window.open("https://wa.me/51997113824?text=" + texto, "_blank");
+});
+</script>
+
+</body>
 </html>
