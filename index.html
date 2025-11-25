@@ -294,60 +294,45 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
             z-index: 2000;
         }
+
         /* --- Ajustes PARA CELULAR --- */
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                /* pasa la figura abajo */
+                text-align: center;
+                height: auto;
+                padding: 120px 5% 60px 5%;
+                gap: 40px;
+            }
 
-    .hero {
-        flex-direction: column;      /* pasa la figura abajo */
-        text-align: center;
-        height: auto;
-        padding: 120px 5% 60px 5%;
-        gap: 40px;
-    }
+            .hero-figure {
+                width: 200px;
+                /* más pequeño */
+                height: 200px;
+                margin-top: 10px;
+                order: 2;
+                /* asegura que vaya debajo */
+            }
 
-    .hero-figure {
-        width: 200px;                /* más pequeño */
-        height: 200px;
-        margin-top: 10px;
-        order: 2;                    /* asegura que vaya debajo */
-    }
+            .hero-text {
+                order: 1;
+            }
 
-    .hero-text {
-        order: 1;
-    }
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
 
-    .hero-text h1 {
-        font-size: 2.4rem;
-    }
+            .hero-text p {
+                font-size: 1rem;
+            }
 
-    .hero-text p {
-        font-size: 1rem;
-    }
-
-    .btn-main {
-        margin-top: 15px;
-        font-size: 1rem;
-        padding: 12px 22px;
-    }
-}
-/* FIGURA ABSTRACTA 4-7-8 */
-.figura-478 {
-    width: 260px;
-    height: 260px;
-    background: linear-gradient(135deg, #6a00ff, #407bff);
-    border-radius: 55% 45% 60% 40%;
-    transition: transform 1.2s ease, border-radius 1.2s ease, background 1.2s ease;
-    margin: 0 auto;
-}
-
-/* Tamaño móvil */
-@media(max-width: 768px){
-    .figura-478 {
-        width: 180px;
-        height: 180px;
-    }
-}
-
+            .btn-main {
+                margin-top: 15px;
+                font-size: 1rem;
+                padding: 12px 22px;
+            }
+        }
     </style>
 </head>
 
@@ -424,53 +409,6 @@
     <footer
         style="background:#222;color:#fff;padding:20px 0;text-align:center;position:fixed;width:100%;bottom:0;left:0;">
         Celular: 997113824 / apariciocch@gmail.com </footer>
-        <script>
-/* Secuencia 4-7-8 */
-const figura = document.getElementById("figura478");
-
-const colores = [
-    ["#6a00ff", "#407bff"], // Morado → Azul
-    ["#407bff", "#00d28b"], // Azul → Verde
-    ["#00d28b", "#ff5f9e"], // Verde → Rosa
-    ["#ff5f9e", "#6a00ff"]  // Rosa → Morado
-];
-
-let ciclo = 0;
-
-function iniciar478() {
-    const [c1, c2] = colores[ciclo];
-
-    // INHALAR – 4 segundos (se expande)
-    figura.style.transform = "scale(1.25)";
-    figura.style.borderRadius = "60% 40% 65% 35%";
-    figura.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-
-    setTimeout(() => {
-
-        // SOSTENER – 7 segundos (tamaño fijo)
-        figura.style.transform = "scale(1.35)";
-        figura.style.borderRadius = "50% 50% 45% 55%";
-
-        setTimeout(() => {
-
-            // EXHALAR – 8 segundos (se contrae)
-            figura.style.transform = "scale(0.85)";
-            figura.style.borderRadius = "70% 30% 60% 40%";
-
-            setTimeout(() => {
-                // Siguiente ciclo de color
-                ciclo = (ciclo + 1) % colores.length;
-                iniciar478();
-            }, 8000);
-
-        }, 7000);
-
-    }, 4000);
-}
-
-iniciar478();
-</script>
-
 </body>
 
 </html>
