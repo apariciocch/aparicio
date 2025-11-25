@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Psicólogo Aparicio Armando</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playwrite+CZ:wght@100;400&display=swap" rel="stylesheet">
-
 
 <style>
 /* ------------------ PALETA ------------------ */
@@ -24,12 +24,15 @@
 /* ------------------ BASE ------------------ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    font-family: 'Playwrite CZ', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: var(--fondo);
     color: var(--texto);
     overflow-x: hidden;
 }
-
+.titulo-especial {
+    font-family: 'Playwrite CZ', sans-serif !important;
+    letter-spacing: 1px;
+}
 /* ------------------ NAV ------------------ */
 nav {
     position: fixed;
@@ -489,7 +492,7 @@ form button:hover {
 <!-- HERO -->
 <div class="hero">
     <div class="hero-text">
-        <h1>Psicólogo Aparicio Armando</h1>
+        <h1 class="titulo-especial">Psicólogo Aparicio Armando</h1>
         <p>Ayudo a niños, adolescentes y adultos a desarrollar bienestar emocional, habilidades de aprendizaje y seguridad personal.</p>
         <button class="btn-main" onclick="document.querySelector('#contacto').scrollIntoView({behavior: 'smooth'})">Agenda tu sesión</button>
     </div>
