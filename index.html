@@ -279,7 +279,27 @@ form button:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,.3);
     z-index: 2000;
 }
+.contact-info {
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    text-align: center;
+    color: #444;
+}
 
+.contact-info p {
+    margin-bottom: 4px;
+    font-size: 1rem;
+}
+
+.contact-info a {
+    color: var(--morado);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
 </style>
 </head>
 
@@ -349,8 +369,13 @@ form button:hover {
 <section id="contacto">
     <h2 class="title">Contacto</h2>
 
-    <form id="contactForm" action="https://formsubmit.co/apariciocch@gmail.com" method="POST">
+    <!-- Datos directos de contacto -->
+    <div class="contact-info">
+        <p><strong>Celular:</strong> 997113824</p>
+        <p><strong>Correo:</strong> <a href="mailto:apariciocch@gmail.com">apariciocch@gmail.com</a></p>
+    </div>
 
+    <form id="contactForm" action="https://formsubmit.co/apariciocch@gmail.com" method="POST">
         <div class="field">
             <input type="text" name="nombre" id="nombre" placeholder="Tu nombre" required>
             <small class="msg"></small>
@@ -369,11 +394,11 @@ form button:hover {
         <!-- CONFIGURACIONES OCULTAS -->
         <input type="hidden" name="_subject" value="Nuevo mensaje desde tu página web">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://apariciocchhell.onrender.com">
+        <input type="hidden" name="_next" value="https://aparicio-armando.onrender.com">
 
         <button type="submit" id="btnEnviar">Enviar Mensaje</button>
 
-        <a id="btnWhatsApp" 
+        <a id="btnWhatsApp"
            style="display:block; margin-top:15px; text-align:center; font-size:1rem; color:white;
                   background:#25D366; padding:12px; border-radius:10px; font-weight:600; cursor:pointer;">
             Enviar por WhatsApp
