@@ -46,6 +46,8 @@ nav ul {
     display: flex;
     justify-content: center;
     gap: 45px;
+    flex-wrap: wrap;
+    padding: 0 20px;
 }
 
 nav a {
@@ -62,29 +64,33 @@ nav a:hover {
 
 /* ------------------ HERO ------------------ */
 .hero {
-    height: 95vh;
+    min-height: 95vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8%;
+    padding: 100px 8% 50px 8%;
     background: var(--blanco);
     overflow: hidden;
+    gap: 40px;
 }
 
 .hero-text {
     max-width: 500px;
+    flex: 1;
 }
 
 .hero-text h1 {
-    font-size: 3.4rem;
+    font-size: clamp(2rem, 5vw, 3.4rem);
     font-weight: 800;
     color: var(--morado);
+    line-height: 1.2;
 }
 
 .hero-text p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     margin-top: 10px;
     color: #555;
+    line-height: 1.6;
 }
 
 .btn-main {
@@ -102,20 +108,61 @@ nav a:hover {
 
 .btn-main:hover {
     background: var(--rosa);
+    transform: translateY(-2px);
 }
 
-/* OBJETO ABSTRACTO */
-.hero-figure {
+/* FIGURA HERO CON RESPIRACIÓN */
+.hero-figure-container {
+    position: relative;
     width: 380px;
     height: 380px;
-    background: linear-gradient(135deg, var(--morado), var(--azul));
-    border-radius: 58% 42% 55% 45%;
-    animation: morph 3.5s infinite ease-in-out alternate;
+    flex-shrink: 0;
 }
 
-@keyframes morph {
-    0% { border-radius: 58% 42% 55% 45%; transform: scale(1); }
-    100% { border-radius: 48% 52% 45% 55%; transform: scale(1.04); }
+.hero-figure {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    transition: transform 0.3s ease-out, box-shadow 0.5s ease;
+}
+
+.hero-figure-inner {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
+    background: radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.3));
+    animation: spin-slow 20s linear infinite;
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-wave {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid;
+    opacity: 0.15;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-out;
+}
+
+.hero-particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    opacity: 0.5;
+    top: 50%;
+    left: 50%;
+    transition: all 0.3s ease-out;
 }
 
 /* ------------------ SECCIONES ------------------ */
@@ -126,7 +173,7 @@ section {
 /* ------------------ TITULO ------------------ */
 .title {
     text-align: center;
-    font-size: 2.3rem;
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
     font-weight: 700;
     color: var(--azul);
     margin-bottom: 50px;
@@ -156,13 +203,14 @@ section {
 }
 
 .card h3 {
-    font-size: 1.4rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     color: var(--morado);
     margin-bottom: 10px;
 }
 
 .card p {
     color: #555;
+    line-height: 1.6;
 }
 
 /* ------------------ SOBRE MI ------------------ */
@@ -175,16 +223,45 @@ section {
 }
 
 .about img {
-    width: 330px;
+    width: 100%;
+    max-width: 330px;
     border-radius: 18px;
     box-shadow: 0 6px 20px rgba(0,0,0,.1);
 }
 
 .about-text {
     max-width: 500px;
+    flex: 1;
+}
+
+.about-text p {
+    margin-bottom: 15px;
+    line-height: 1.7;
 }
 
 /* ------------------ CONTACTO ------------------ */
+.contact-info {
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+    text-align: center;
+    color: #444;
+}
+
+.contact-info p {
+    margin-bottom: 8px;
+    font-size: clamp(0.95rem, 2vw, 1rem);
+}
+
+.contact-info a {
+    color: var(--morado);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
 form {
     max-width: 600px;
     margin: auto;
@@ -192,6 +269,10 @@ form {
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 8px 28px rgba(0,0,0,.08);
+}
+
+.field {
+    margin-bottom: 20px;
 }
 
 .field input.valid,
@@ -218,6 +299,7 @@ form input, form textarea {
     border-radius: 12px;
     border: 2px solid #ddd;
     transition: .3s;
+    font-family: 'Poppins', sans-serif;
 }
 
 form button {
@@ -235,6 +317,7 @@ form button {
 
 form button:hover {
     background: var(--rosa);
+    transform: translateY(-2px);
 }
 
 .btn-loading {
@@ -261,7 +344,27 @@ form button:hover {
     to { transform: translateY(-50%) rotate(360deg); }
 }
 
-/* WHATSAPP */
+#btnWhatsApp {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    background: #25D366;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .3s;
+}
+
+#btnWhatsApp:hover {
+    background: #1ea952;
+    transform: translateY(-2px);
+}
+
+/* WHATSAPP FLOTANTE */
 .whatsapp {
     position: fixed;
     right: 25px;
@@ -278,27 +381,95 @@ form button:hover {
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,.3);
     z-index: 2000;
-}
-.contact-info {
-    max-width: 600px;
-    margin: 0 auto 25px auto;
-    text-align: center;
-    color: #444;
+    transition: .3s;
 }
 
-.contact-info p {
-    margin-bottom: 4px;
-    font-size: 1rem;
+.whatsapp:hover {
+    transform: scale(1.1);
 }
 
-.contact-info a {
-    color: var(--morado);
-    text-decoration: none;
-    font-weight: 600;
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 968px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 100px 5% 50px 5%;
+    }
+    
+    .hero-figure-container {
+        width: 300px;
+        height: 300px;
+        margin-top: 30px;
+    }
+    
+    nav ul {
+        gap: 25px;
+    }
+    
+    section {
+        padding: 70px 5%;
+    }
+    
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
 }
 
-.contact-info a:hover {
-    text-decoration: underline;
+@media (max-width: 640px) {
+    nav ul {
+        gap: 15px;
+        font-size: 16px;
+    }
+    
+    nav a {
+        font-size: 16px;
+    }
+    
+    .hero {
+        padding: 90px 5% 40px 5%;
+    }
+    
+    .hero-figure-container {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .btn-main {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+    
+    form {
+        padding: 30px 20px;
+    }
+    
+    .whatsapp {
+        width: 55px;
+        height: 55px;
+        right: 20px;
+        bottom: 20px;
+    }
+    
+    .about {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-figure-container {
+        width: 220px;
+        height: 220px;
+    }
+    
+    nav ul {
+        gap: 10px;
+        font-size: 14px;
+    }
+    
+    nav a {
+        font-size: 14px;
+    }
 }
 </style>
 </head>
@@ -319,10 +490,25 @@ form button:hover {
     <div class="hero-text">
         <h1>Psicólogo Aparicio Armando</h1>
         <p>Ayudo a niños, adolescentes y adultos a desarrollar bienestar emocional, habilidades de aprendizaje y seguridad personal.</p>
-        <button class="btn-main" onclick="document.querySelector('#contacto').scrollIntoView()">Agenda tu sesión</button>
+        <button class="btn-main" onclick="document.querySelector('#contacto').scrollIntoView({behavior: 'smooth'})">Agenda tu sesión</button>
     </div>
 
-    <div class="hero-figure"></div>
+    <div class="hero-figure-container">
+        <div class="hero-wave" id="wave1"></div>
+        <div class="hero-wave" id="wave2"></div>
+        <div class="hero-wave" id="wave3"></div>
+        <div class="hero-figure" id="heroFigure">
+            <div class="hero-figure-inner"></div>
+        </div>
+        <div class="hero-particle" id="particle0"></div>
+        <div class="hero-particle" id="particle1"></div>
+        <div class="hero-particle" id="particle2"></div>
+        <div class="hero-particle" id="particle3"></div>
+        <div class="hero-particle" id="particle4"></div>
+        <div class="hero-particle" id="particle5"></div>
+        <div class="hero-particle" id="particle6"></div>
+        <div class="hero-particle" id="particle7"></div>
+    </div>
 </div>
 
 <!-- SERVICIOS -->
@@ -357,7 +543,7 @@ form button:hover {
     <h2 class="title">Sobre mí</h2>
 
     <div class="about">
-        <img src="apa.jpg" alt="Foto">
+        <img src="apa.jpg" alt="Psicólogo Aparicio Armando">
         <div class="about-text">
             <p><strong>Soy Aparicio Armando</strong>, psicólogo especializado en aprendizaje, conducta y bienestar.</p>
             <p>Trabajo con un enfoque humano, moderno y basado en evidencia, acompañando a cada persona según sus necesidades.</p>
@@ -398,21 +584,115 @@ form button:hover {
 
         <button type="submit" id="btnEnviar">Enviar Mensaje</button>
 
-        <a id="btnWhatsApp"
-           style="display:block; margin-top:15px; text-align:center; font-size:1rem; color:white;
-                  background:#25D366; padding:12px; border-radius:10px; font-weight:600; cursor:pointer;">
+        <a id="btnWhatsApp" href="#" onclick="event.preventDefault(); sendWhatsApp();">
             Enviar por WhatsApp
         </a>
     </form>
 </section>
 
-<!-- WHATSAPP -->
+<!-- WHATSAPP FLOTANTE -->
 <div class="whatsapp" onclick="window.open('https://wa.me/51997113824','_blank')">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
          alt="WhatsApp" style="width:32px; height:32px;">
 </div>
 
 <script>
+// ============== ANIMACIÓN DE RESPIRACIÓN EN HERO ==============
+(function() {
+    let phase = 'inhale';
+    let scale = 1;
+    let animationFrame = null;
+    let phaseTimer = null;
+    
+    const phases = {
+        inhale: { duration: 4000, next: 'hold1' },
+        hold1: { duration: 4000, next: 'exhale' },
+        exhale: { duration: 6000, next: 'hold2' },
+        hold2: { duration: 2000, next: 'inhale' }
+    };
+    
+    const colors = {
+        inhale: '#3A7DFF',
+        hold1: '#a78bfa',
+        exhale: '#4CD1A1',
+        hold2: '#FFC400'
+    };
+    
+    const figure = document.getElementById('heroFigure');
+    const waves = [
+        document.getElementById('wave1'),
+        document.getElementById('wave2'),
+        document.getElementById('wave3')
+    ];
+    const particles = [...Array(8)].map((_, i) => 
+        document.getElementById(`particle${i}`)
+    );
+    
+    function updateVisuals() {
+        const color = colors[phase];
+        
+        // Actualizar figura principal
+        figure.style.background = `linear-gradient(135deg, ${color}, ${color}dd)`;
+        figure.style.transform = `scale(${scale})`;
+        figure.style.boxShadow = `0 0 50px ${color}66`;
+        
+        // Actualizar ondas
+        waves.forEach((wave, i) => {
+            const baseSize = 120 + (i * 30);
+            const size = baseSize * scale;
+            wave.style.width = `${size}%`;
+            wave.style.height = `${size}%`;
+            wave.style.borderColor = color;
+        });
+        
+        // Actualizar partículas
+        particles.forEach((particle, i) => {
+            particle.style.background = color;
+            const distance = 140 * scale;
+            const angle = (i * 45) * Math.PI / 180;
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            particle.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+    }
+    
+    function animate() {
+        const startTime = Date.now();
+        
+        function frame() {
+            const elapsed = Date.now() - startTime;
+            
+            if (phase === 'inhale') {
+                const progress = Math.min(elapsed / 4000, 1);
+                scale = 1 + progress * 0.5;
+            } else if (phase === 'exhale') {
+                const progress = Math.min(elapsed / 6000, 1);
+                scale = 1.5 - progress * 0.5;
+            } else if (phase === 'hold1') {
+                scale = 1.5;
+            } else {
+                scale = 1;
+            }
+            
+            updateVisuals();
+            animationFrame = requestAnimationFrame(frame);
+        }
+        
+        cancelAnimationFrame(animationFrame);
+        frame();
+    }
+    
+    function nextPhase() {
+        phase = phases[phase].next;
+        animate();
+        phaseTimer = setTimeout(nextPhase, phases[phase].duration);
+    }
+    
+    // Iniciar animación
+    animate();
+    phaseTimer = setTimeout(nextPhase, phases[phase].duration);
+})();
+
 // Animación de tarjetas al hacer scroll
 const cards = document.querySelectorAll(".card");
 function showCards() {
@@ -459,17 +739,22 @@ form.addEventListener("submit", () => {
 });
 
 // WHATSAPP
-document.getElementById("btnWhatsApp").addEventListener("click", () => {
+function sendWhatsApp() {
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
     const mensaje = document.getElementById("mensaje").value;
+
+    if (!nombre || !correo || !mensaje) {
+        alert("Por favor completa todos los campos");
+        return;
+    }
 
     const texto = encodeURIComponent(
         `Hola, soy ${nombre}.\nCorreo: ${correo}\n\nMensaje:\n${mensaje}`
     );
 
     window.open("https://wa.me/51997113824?text=" + texto, "_blank");
-});
+}
 </script>
 
 </body>
