@@ -117,59 +117,27 @@ nav a:hover {
     transform: translateY(-2px);
 }
 
-/* FIGURA HERO CON RESPIRACIÓN */
-.hero-figure-container {
-    position: relative;
-    width: 380px;
-    height: 380px;
-    flex-shrink: 0;
-}
-
-.hero-figure {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: 50%;
-    transition: transform 0.3s ease-out, box-shadow 0.5s ease;
-}
-
-.hero-figure-inner {
-    position: absolute;
-    width: 60%;
-    height: 60%;
-    top: 20%;
-    left: 20%;
-    border-radius: 50%;
-    background: radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.3));
-    animation: spin-slow 20s linear infinite;
-}
-
-@keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.hero-wave {
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid;
-    opacity: 0.15;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease-out;
-}
-
-.hero-particle {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    opacity: 0.5;
-    top: 50%;
-    left: 50%;
-    transition: all 0.3s ease-out;
-}
+/* JUEGO - EL CASTILLO */
+* { margin:0; padding:0; box-sizing:border-box; }
+#wrap { width:100%; max-width:680px; flex: 1; }
+#hud { display:flex; justify-content:space-between; align-items:center; padding:8px 16px; background:#06060c; border:1px solid #1a1a32; border-bottom:none; border-radius:8px 8px 0 0; }
+#roomName { color:#ccccff; font-size:12px; font-weight:500; }
+#dots { display:flex; gap:5px; }
+.dot { width:7px; height:7px; border-radius:50%; background:#111128; border:1px solid #2a2a55; transition:all 0.4s; }
+.dot.done   { background:#4444aa; border-color:#7777cc; }
+.dot.active { background:#9999ff; border-color:#ccccff; }
+#c { display:block; width:100%; border:1px solid #1a1a32; image-rendering:pixelated; }
+#panel { background:#06060c; border:1px solid #1a1a32; border-top:none; padding:14px 20px; border-radius:0 0 8px 8px; min-height:72px; }
+#pact { font-size:10px; color:#444488; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
+#pq   { font-size:13px; color:#bbbbee; line-height:1.6; white-space:pre-line; }
+#ph   { font-size:11px; color:#333366; margin-top:6px; }
+#ctrl { display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; padding:8px 0 0; max-width:200px; margin:0 auto; }
+#restart-wrap { text-align:center; padding:6px 0 0; }
+#btnRestart { background:#0c0c1e; color:#5555aa; border:1px solid #222244; padding:9px 28px; font-size:12px; cursor:pointer; border-radius:6px; font-family:monospace; transition:all 0.08s; display:none; }
+#btnRestart:hover { background:#181838; border-color:#5555aa; color:#ccccff; }
+.btn { background:#0c0c1e; color:#7777aa; border:1px solid #222244; padding:12px 0; font-size:16px; cursor:pointer; border-radius:6px; user-select:none; touch-action:manipulation; text-align:center; -webkit-user-select:none; transition:all 0.08s; font-family:monospace; }
+.btn:active,.btn.on { background:#181838; border-color:#5555aa; color:#ccccff; }
+.empty { background:transparent!important; border-color:transparent!important; pointer-events:none; }
 
 /* ------------------ SECCIONES ------------------ */
 section {
@@ -500,22 +468,30 @@ form button:hover {
         <button class="btn-main" onclick="document.querySelector('#contacto').scrollIntoView({behavior: 'smooth'})">Agenda tu sesión</button>
     </div>
 
-    <div class="hero-figure-container">
-        <div class="hero-wave" id="wave1"></div>
-        <div class="hero-wave" id="wave2"></div>
-        <div class="hero-wave" id="wave3"></div>
-        <div class="hero-figure" id="heroFigure">
-            <div class="hero-figure-inner"></div>
-        </div>
-        <div class="hero-particle" id="particle0"></div>
-        <div class="hero-particle" id="particle1"></div>
-        <div class="hero-particle" id="particle2"></div>
-        <div class="hero-particle" id="particle3"></div>
-        <div class="hero-particle" id="particle4"></div>
-        <div class="hero-particle" id="particle5"></div>
-        <div class="hero-particle" id="particle6"></div>
-        <div class="hero-particle" id="particle7"></div>
-    </div>
+    <div id="wrap" style="flex: 1; max-width: 680px;">
+  <div id="hud">
+    <span style="color:#6666aa;font-size:11px;">El Castillo</span>
+    <span id="roomName" style="color:#ccccff;font-size:12px;font-weight:500;"></span>
+    <div id="dots"></div>
+  </div>
+  <canvas id="c" width="680" height="480"></canvas>
+  <div id="panel">
+    <div id="pq"></div>
+    <div id="ph"></div>
+  </div>
+  <div id="restart-wrap"><button id="btnRestart">↺ volver al inicio</button></div>
+  <div id="ctrl">
+    <div class="btn empty"></div>
+    <button class="btn" id="bU">▲</button>
+    <div class="btn empty"></div>
+    <button class="btn" id="bL">◀</button>
+    <div class="btn empty"></div>
+    <button class="btn" id="bR">▶</button>
+    <div class="btn empty"></div>
+    <button class="btn" id="bD">▼</button>
+    <div class="btn empty"></div>
+  </div>
+</div>
 </div>
 
 <!-- SERVICIOS -->
@@ -604,101 +580,325 @@ form button:hover {
 </div>
 
 <script>
-// ============== ANIMACIÓN DE RESPIRACIÓN EN HERO ==============
-(function() {
-    let phase = 'inhale';
-    let scale = 1;
-    let animationFrame = null;
-    let phaseTimer = null;
-    
-    const phases = {
-        inhale: { duration: 4000, next: 'hold1' },
-        hold1: { duration: 4000, next: 'exhale' },
-        exhale: { duration: 6000, next: 'hold2' },
-        hold2: { duration: 2000, next: 'inhale' }
-    };
-    
-    const colors = {
-        inhale: '#3A7DFF',
-        hold1: '#a78bfa',
-        exhale: '#4CD1A1',
-        hold2: '#FFC400'
-    };
-    
-    const figure = document.getElementById('heroFigure');
-    const waves = [
-        document.getElementById('wave1'),
-        document.getElementById('wave2'),
-        document.getElementById('wave3')
-    ];
-    const particles = [...Array(8)].map((_, i) => 
-        document.getElementById(`particle${i}`)
-    );
-    
-    function updateVisuals() {
-        const color = colors[phase];
-        
-        // Actualizar figura principal
-        figure.style.background = `linear-gradient(135deg, ${color}, ${color}dd)`;
-        figure.style.transform = `scale(${scale})`;
-        figure.style.boxShadow = `0 0 50px ${color}66`;
-        
-        // Actualizar ondas
-        waves.forEach((wave, i) => {
-            const baseSize = 120 + (i * 30);
-            const size = baseSize * scale;
-            wave.style.width = `${size}%`;
-            wave.style.height = `${size}%`;
-            wave.style.borderColor = color;
-        });
-        
-        // Actualizar partículas
-        particles.forEach((particle, i) => {
-            particle.style.background = color;
-            const distance = 140 * scale;
-            const angle = (i * 45) * Math.PI / 180;
-            const x = Math.cos(angle) * distance;
-            const y = Math.sin(angle) * distance;
-            particle.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-        });
+<script>
+// ============== EL CASTILLO - JUEGO INTERACTIVO ==============
+const cv=document.getElementById('c'), ctx=cv.getContext('2d');
+const W=680,H=480,T=40,COLS=17,ROWS=12;
+const WL=1,FL=0,GM=2,DR=3;
+ 
+// ── Input ────────────────────────────────────────────────────
+const K={},Touch={};
+document.addEventListener('keydown',e=>{K[e.key]=true;if([' ','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))e.preventDefault();});
+document.addEventListener('keyup',e=>K[e.key]=false);
+['bU','bD','bL','bR'].forEach((id,i)=>{
+  const k=['u','d','l','r'][i],el=document.getElementById(id);
+  el.addEventListener('pointerdown',e=>{Touch[k]=true;el.classList.add('on');e.preventDefault();});
+  el.addEventListener('pointerup',()=>{Touch[k]=false;el.classList.remove('on');});
+  el.addEventListener('pointerleave',()=>{Touch[k]=false;el.classList.remove('on');});
+});
+const gU=()=>K['ArrowUp']   ||K['w']||Touch['u'];
+const gD=()=>K['ArrowDown'] ||K['s']||Touch['d'];
+const gL=()=>K['ArrowLeft'] ||K['a']||Touch['l'];
+const gR=()=>K['ArrowRight']||K['d']||Touch['r'];
+ 
+// ── Map builder ──────────────────────────────────────────────
+function blank(){return Array.from({length:ROWS},(_,r)=>Array.from({length:COLS},(_,c)=>(r===0||r===ROWS-1||c===0||c===COLS-1)?WL:FL));}
+function s(g,r,c,v){if(g[r]&&g[r][c]!==undefined)g[r][c]=v;}
+function hw(g,r,c1,c2){for(let c=c1;c<=c2;c++)s(g,r,c,WL);}
+function vw(g,c,r1,r2){for(let r=r1;r<=r2;r++)s(g,r,c,WL);}
+ 
+// ── Build all 7 maps (verified via BFS externally) ───────────
+function buildMaps(){
+  const maps=[];
+ 
+  // 0 · Entrada — U-maze with gem alcoves
+  {const g=blank();
+  hw(g,2,2,14);vw(g,2,2,9);vw(g,14,2,9);hw(g,9,2,6);hw(g,9,10,14);
+  s(g,2,7,FL);s(g,2,8,FL);s(g,2,9,FL);
+  hw(g,5,4,12);s(g,5,8,FL);
+  vw(g,4,5,8);s(g,5,4,FL);vw(g,12,5,8);s(g,5,12,FL);
+  s(g,4,4,GM);s(g,4,12,GM);s(g,ROWS-1,8,DR);maps.push(g);}
+ 
+  // 1 · Momento presente — inward spiral
+  {const g=blank();
+  hw(g,2,2,14);s(g,2,14,FL);
+  vw(g,14,2,9);s(g,9,14,FL);
+  hw(g,9,2,13);s(g,9,2,FL);
+  vw(g,2,3,9);s(g,3,2,FL);
+  hw(g,5,4,12);s(g,5,4,FL);
+  s(g,2,14,GM);s(g,6,8,GM);s(g,0,8,DR);maps.push(g);}
+ 
+  // 2 · Aceptación — serpentine horizontal
+  {const g=blank();
+  hw(g,3,2,14);s(g,3,14,FL);
+  hw(g,5,2,13);s(g,5,2,FL);
+  hw(g,7,3,14);s(g,7,14,FL);
+  hw(g,9,2,12);s(g,9,2,FL);
+  s(g,5,14,GM);s(g,9,7,GM);s(g,ROWS-1,1,DR);maps.push(g);}
+ 
+  // 3 · Defusión — zig-zag single path
+  {const g=blank();
+  hw(g,3,1,13);s(g,3,13,FL);
+  hw(g,5,3,15);s(g,5,3,FL);
+  hw(g,7,1,13);s(g,7,13,FL);
+  hw(g,9,3,15);s(g,9,3,FL);
+  s(g,4,2,GM);s(g,10,15,GM);s(g,ROWS-1,8,DR);maps.push(g);}
+ 
+  // 4 · Yo observador — symmetric cross corridors
+  {const g=blank();
+  hw(g,4,2,7);hw(g,4,9,14);
+  hw(g,7,2,7);hw(g,7,9,14);
+  vw(g,7,1,4);vw(g,9,1,4);
+  vw(g,7,7,10);vw(g,9,7,10);
+  s(g,2,3,GM);s(g,2,13,GM);s(g,0,8,DR);maps.push(g);}
+ 
+  // 5 · Valores — garden islands with open gaps
+  {const g=blank();
+  hw(g,3,3,7);hw(g,3,9,13);
+  hw(g,6,3,7);hw(g,6,9,13);
+  vw(g,3,3,6);vw(g,7,3,6);
+  vw(g,9,3,6);vw(g,13,3,6);
+  s(g,3,8,FL);s(g,6,8,FL);s(g,4,3,FL);s(g,4,9,FL);
+  s(g,2,8,GM);s(g,5,14,GM);s(g,ROWS-1,15,DR);maps.push(g);}
+ 
+  // 6 · Acción — staircase path
+  {const g=blank();
+  hw(g,2,3,15);s(g,2,3,FL);
+  hw(g,4,1,13);s(g,4,13,FL);
+  hw(g,6,3,15);s(g,6,3,FL);
+  hw(g,8,1,13);s(g,8,13,FL);
+  s(g,3,8,GM);s(g,9,14,GM);s(g,ROWS-1,8,DR);maps.push(g);}
+ 
+  return maps;
+}
+ 
+const MAPS=buildMaps();
+ 
+// ── Room metadata ────────────────────────────────────────────
+const ROOMS=[
+  {name:'Entrada del castillo',     act:'',                    bg:'entrada',   start:[8,10],  door:[8,11],  exitTo:1,
+   q:'¿Qué estás cargando hoy?\nEstás entrando al castillo.',
+   h:'Recoge los dos cristales para abrir la puerta.',
+   pal:{fl:'#13132a',fl2:'#17173a',wl:'#08081a',gm:'#aaaaff',dr:'#5544ee'}},
+ 
+  {name:'Sala del momento presente', act:'Momento presente',   bg:'presente',  start:[1,10],  door:[8,0],   exitTo:2,
+   q:'¿Qué puedes sentir ahora mismo?\nEl suelo bajo tus pies. El aire en tu piel.',
+   h:'Camina con calma. Recoge los dos cristales.',
+   pal:{fl:'#0d1a28',fl2:'#102030',wl:'#070e16',gm:'#66ddff',dr:'#3399cc'}},
+ 
+  {name:'Sala de la aceptación',    act:'Aceptación',          bg:'aceptacion',start:[1,1],   door:[1,11],  exitTo:3,
+   q:'¿Qué estás intentando no sentir?\nNómbralo sin juzgarlo.',
+   h:'No hace falta que desaparezca para seguir.',
+   pal:{fl:'#130e20',fl2:'#180e28',wl:'#0c0816',gm:'#cc88ff',dr:'#8833cc'}},
+ 
+  {name:'Torre de la defusión',     act:'Defusión cognitiva',  bg:'defusion',  start:[15,1],  door:[8,11],  exitTo:4,
+   q:'"Tengo el pensamiento de que..."\nVes tus ideas pasar.\nNo son tú. Solo pasan.',
+   h:'El laberinto de la mente tiene salida.',
+   pal:{fl:'#0d0d20',fl2:'#111128',wl:'#080814',gm:'#8888ff',dr:'#4444cc'}},
+ 
+  {name:'Sala del yo observador',   act:'Yo como contexto',    bg:'yoobs',     start:[8,10],  door:[8,0],   exitTo:5,
+   q:'Eres el cielo, no la tormenta.\n¿Puedes observar lo que sientes\nsin ser eso que sientes?',
+   h:'Desde el centro todo se ve diferente.',
+   pal:{fl:'#0d1520',fl2:'#101c28',wl:'#080e14',gm:'#88ccff',dr:'#3366aa'}},
+ 
+  {name:'El jardín de los valores', act:'Valores',             bg:'valores',   start:[1,10],  door:[15,11], exitTo:6,
+   q:'Si este malestar no existiera,\n¿hacia dónde querrías caminar hoy?',
+   h:'Cada cristal es un valor tuyo.',
+   pal:{fl:'#0c160c',fl2:'#101e10',wl:'#080e08',gm:'#66ee88',dr:'#339944'}},
+ 
+  {name:'Torre de la acción',       act:'Acción comprometida', bg:'accion',    start:[1,6],   door:[8,11],  exitTo:-1,
+   q:'¿Qué paso pequeño podrías dar hoy\nhacia lo que te importa?',
+   h:'Un paso a la vez. La salida existe.',
+   pal:{fl:'#160e0e',fl2:'#1c1212',wl:'#0c0808',gm:'#ffaa55',dr:'#cc5533'}},
+];
+ 
+// ── State ────────────────────────────────────────────────────
+let roomIdx=0, tick=0, going=false, doorOpen=false;
+let px,py, pdir='down', pwalkF=0, pwalkT=0, pmoving=false;
+let gems=[];
+const parts=[];
+ 
+function initRoom(idx){
+  if(idx===-1){showFinal();return;}
+  roomIdx=idx; going=false; doorOpen=false;
+  pwalkF=0; pwalkT=0; parts.length=0;
+  const r=ROOMS[idx];
+  px=r.start[0]*T+T/2; py=r.start[1]*T+T/2; pdir='down';
+  gems=[];
+  MAPS[idx].forEach((row,ri)=>row.forEach((cell,ci)=>{if(cell===GM)gems.push({col:ci,row:ri,collected:false});}));
+  document.getElementById('roomName').textContent=r.name;
+  document.getElementById('pq').textContent=r.q;
+  document.getElementById('ph').textContent=r.h;
+  document.getElementById('btnRestart').style.display='none';
+  const de=document.getElementById('dots'); de.innerHTML='';
+  ROOMS.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i<idx?' done':i===idx?' active':'');de.appendChild(d);});
+}
+ 
+function showFinal(){
+  going=true;
+  document.getElementById('pq').textContent='Recorriste el castillo entero.\nCada habitación, un proceso real.\nLa ansiedad sigue, pero tú también caminas.\nEso es todo lo que necesitas.';
+  document.getElementById('ph').textContent='';
+  document.getElementById('roomName').textContent='El castillo completo';
+  document.querySelectorAll('.dot').forEach(d=>d.className='dot done');
+  document.getElementById('btnRestart').style.display='inline-block';
+}
+ 
+// ── Physics ──────────────────────────────────────────────────
+const SPEED=2.4, HB=11;
+function cellAt(col,row){const g=MAPS[roomIdx];if(row<0||row>=ROWS||col<0||col>=COLS)return WL;return g[row][col];}
+function solid(col,row){const c=cellAt(col,row);if(c===DR)return !doorOpen;return c===WL;}
+function tileOf(wx,wy){return{col:Math.floor(wx/T),row:Math.floor(wy/T)};}
+ 
+function update(){
+  tick++;
+  if(going)return;
+  let dx=0,dy=0;
+  if(gL()){dx=-SPEED;pdir='left';}
+  if(gR()){dx= SPEED;pdir='right';}
+  if(gU()){dy=-SPEED;pdir='up';}
+  if(gD()){dy= SPEED;pdir='down';}
+  pmoving=dx!==0||dy!==0;
+  if(pmoving){pwalkT++;if(pwalkT%4===0)pwalkF++;}else pwalkT=0;
+ 
+  // move X
+  const nx=px+dx;
+  const cx=[tileOf(nx-HB,py-HB+2),tileOf(nx+HB,py-HB+2),tileOf(nx-HB,py+HB-2),tileOf(nx+HB,py+HB-2)];
+  if(!cx.some(t=>solid(t.col,t.row)))px=nx;
+ 
+  // move Y
+  const ny=py+dy;
+  const cy=[tileOf(px-HB+2,ny-HB),tileOf(px+HB-2,ny-HB),tileOf(px-HB+2,ny+HB),tileOf(px+HB-2,ny+HB)];
+  if(!cy.some(t=>solid(t.col,t.row)))py=ny;
+ 
+  // gem pickup
+  gems.forEach(g=>{
+    if(g.collected)return;
+    if(Math.abs(px-(g.col*T+T/2))<HB+10&&Math.abs(py-(g.row*T+T/2))<HB+10){
+      g.collected=true;
+      burst(g.col*T+T/2,g.row*T+T/2,ROOMS[roomIdx].pal.gm);
     }
-    
-    function animate() {
-        const startTime = Date.now();
-        
-        function frame() {
-            const elapsed = Date.now() - startTime;
-            
-            if (phase === 'inhale') {
-                const progress = Math.min(elapsed / 4000, 1);
-                scale = 1 + progress * 0.5;
-            } else if (phase === 'exhale') {
-                const progress = Math.min(elapsed / 6000, 1);
-                scale = 1.5 - progress * 0.5;
-            } else if (phase === 'hold1') {
-                scale = 1.5;
-            } else {
-                scale = 1;
-            }
-            
-            updateVisuals();
-            animationFrame = requestAnimationFrame(frame);
+  });
+ 
+  // door unlock
+  if(!doorOpen&&gems.every(g=>g.collected)){
+    doorOpen=true;
+    const r=ROOMS[roomIdx];
+    burst(r.door[0]*T+T/2,r.door[1]*T+T/2,r.pal.dr);
+  }
+ 
+  // enter door
+  if(doorOpen&&!going){
+    const r=ROOMS[roomIdx];
+    const dcx=r.door[0]*T+T/2,dcy=r.door[1]*T+T/2;
+    if(Math.abs(px-dcx)<HB+14&&Math.abs(py-dcy)<HB+14){going=true;setTimeout(()=>initRoom(r.exitTo),500);}
+  }
+ 
+  // ambient particles
+  if(tick%20===0&&parts.length<30){const pal=ROOMS[roomIdx].pal;parts.push({x:20+Math.random()*(W-40),y:20+Math.random()*(H-40),vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,life:1,col:pal.gm,r:1+Math.random()*1.5});}
+  for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.x+=p.vx;p.y+=p.vy;p.life-=.006;if(p.life<=0)parts.splice(i,1);}
+}
+ 
+function burst(x,y,col){for(let i=0;i<14;i++)parts.push({x,y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,life:1,col,r:2+Math.random()*2});}
+ 
+// ── Draw ─────────────────────────────────────────────────────
+function drawRoom(){
+  const r=ROOMS[roomIdx],pal=r.pal,map=MAPS[roomIdx];
+  ctx.fillStyle=pal.wl; ctx.fillRect(0,0,W,H);
+ 
+  for(let row=0;row<ROWS;row++){
+    for(let col=0;col<COLS;col++){
+      const cell=map[row][col],tx=col*T,ty=row*T;
+      if(cell===WL){
+        ctx.fillStyle=pal.wl; ctx.fillRect(tx,ty,T,T);
+        const boff=(row%2)*10;
+        ctx.fillStyle='rgba(255,255,255,0.05)';
+        for(let b=boff;b<T;b+=20)ctx.fillRect(tx+b,ty+1,Math.min(17,T-b-1),T-2);
+        ctx.fillStyle='rgba(255,255,255,0.07)'; ctx.fillRect(tx,ty,T,2);
+        ctx.fillStyle='rgba(0,0,0,0.25)'; ctx.fillRect(tx,ty+T-2,T,2);
+      } else {
+        ctx.fillStyle=(row+col)%2===0?pal.fl:pal.fl2; ctx.fillRect(tx,ty,T,T);
+        ctx.strokeStyle='rgba(255,255,255,0.025)'; ctx.lineWidth=0.5; ctx.strokeRect(tx+.5,ty+.5,T-1,T-1);
+ 
+        if(cell===GM){
+          const gem=gems.find(g=>g.col===col&&g.row===row);
+          if(gem&&!gem.collected){
+            const pulse=0.55+Math.sin(tick*.09+col*.6)*.45;
+            ctx.save();
+            ctx.shadowColor=pal.gm; ctx.shadowBlur=10*pulse;
+            ctx.fillStyle=pal.gm; ctx.globalAlpha=pulse;
+            ctx.beginPath();ctx.moveTo(tx+T/2,ty+7);ctx.lineTo(tx+T-7,ty+T/2);ctx.lineTo(tx+T/2,ty+T-7);ctx.lineTo(tx+7,ty+T/2);ctx.closePath();ctx.fill();
+            ctx.globalAlpha=1; ctx.restore();
+          }
         }
-        
-        cancelAnimationFrame(animationFrame);
-        frame();
+ 
+        if(cell===DR){
+          if(doorOpen){
+            const pulse=.5+Math.sin(tick*.1)*.5;
+            ctx.save();ctx.shadowColor=pal.dr;ctx.shadowBlur=14*pulse;
+            ctx.fillStyle=pal.dr;ctx.globalAlpha=.7+pulse*.3;ctx.fillRect(tx+4,ty+4,T-8,T-8);
+            ctx.fillStyle='#fff';ctx.globalAlpha=pulse;ctx.font='bold 15px monospace';ctx.textAlign='center';ctx.fillText('▶',tx+T/2,ty+T/2+6);
+            ctx.globalAlpha=1;ctx.restore();
+          } else {
+            ctx.fillStyle='rgba(30,15,70,.7)';ctx.fillRect(tx+4,ty+4,T-8,T-8);
+            ctx.strokeStyle='rgba(70,50,130,.6)';ctx.lineWidth=1.5;ctx.strokeRect(tx+4,ty+4,T-8,T-8);
+            ctx.fillStyle='rgba(70,50,130,.7)';ctx.font='13px monospace';ctx.textAlign='center';ctx.fillText('🔒',tx+T/2,ty+T/2+5);
+          }
+        }
+      }
     }
-    
-    function nextPhase() {
-        phase = phases[phase].next;
-        animate();
-        phaseTimer = setTimeout(nextPhase, phases[phase].duration);
-    }
-    
-    // Iniciar animación
-    animate();
-    phaseTimer = setTimeout(nextPhase, phases[phase].duration);
-})();
+  }
+ 
+  // HUD
+  const rem=gems.filter(g=>!g.collected).length;
+  ctx.fillStyle='rgba(0,0,0,.65)';ctx.fillRect(8,8,160,26);
+  ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=.5;ctx.strokeRect(8,8,160,26);
+  ctx.font='11px monospace';ctx.textAlign='left';
+  if(rem>0){ctx.fillStyle=ROOMS[roomIdx].pal.gm;ctx.fillText('◆ ×'+rem+'  para abrir la puerta',16,25);}
+  else{ctx.fillStyle='#88ff99';ctx.fillText('✓ ¡Puerta abierta! Avanza',16,25);}
+}
+ 
+function drawParticles(){parts.forEach(p=>{ctx.globalAlpha=p.life*.5;ctx.fillStyle=p.col;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;}
+ 
+function drawStick(){
+  const x=px,y=py,wf=(pwalkF%4)/4*Math.PI*2;
+  ctx.save();
+  ctx.fillStyle='rgba(0,0,0,.35)';ctx.beginPath();ctx.ellipse(x,y+3,9,5,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#eeeeff';ctx.beginPath();ctx.arc(x,y,7,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ccccee';ctx.lineWidth=2;ctx.lineCap='round';
+  const leg=pmoving?Math.sin(wf)*6:0;
+  if(pdir==='down'){
+    ctx.beginPath();ctx.moveTo(x-3,y+5);ctx.lineTo(x-3+leg*.4,y+13);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+3,y+5);ctx.lineTo(x+3-leg*.4,y+13);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x-6,y);ctx.lineTo(x-11-leg*.3,y+5);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+6,y);ctx.lineTo(x+11+leg*.3,y+5);ctx.stroke();
+    ctx.fillStyle='#0a0a20';ctx.beginPath();ctx.arc(x-2,y+2,1.5,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(x+2,y+2,1.5,0,Math.PI*2);ctx.fill();
+  }else if(pdir==='up'){
+    ctx.beginPath();ctx.moveTo(x-3,y-5);ctx.lineTo(x-3+leg*.4,y-13);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+3,y-5);ctx.lineTo(x+3-leg*.4,y-13);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x-6,y);ctx.lineTo(x-11-leg*.3,y-5);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+6,y);ctx.lineTo(x+11+leg*.3,y-5);ctx.stroke();
+  }else if(pdir==='left'){
+    ctx.beginPath();ctx.moveTo(x-5,y+3);ctx.lineTo(x-13,y+3+leg*.4);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x-5,y-3);ctx.lineTo(x-13,y-3-leg*.4);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x,y-6);ctx.lineTo(x-5,y-11+leg*.3);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x,y+6);ctx.lineTo(x-5,y+11-leg*.3);ctx.stroke();
+    ctx.fillStyle='#0a0a20';ctx.beginPath();ctx.arc(x-3,y-1,1.5,0,Math.PI*2);ctx.fill();
+  }else{
+    ctx.beginPath();ctx.moveTo(x+5,y+3);ctx.lineTo(x+13,y+3+leg*.4);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+5,y-3);ctx.lineTo(x+13,y-3-leg*.4);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x,y-6);ctx.lineTo(x+5,y-11+leg*.3);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x,y+6);ctx.lineTo(x+5,y+11-leg*.3);ctx.stroke();
+    ctx.fillStyle='#0a0a20';ctx.beginPath();ctx.arc(x+3,y-1,1.5,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
+}
+ 
+document.getElementById('btnRestart').addEventListener('click',()=>initRoom(0));
+function draw(){ctx.clearRect(0,0,W,H);drawRoom();drawParticles();drawStick();}
+function loop(){update();draw();requestAnimationFrame(loop);}
+initRoom(0);
+loop();
 
 // Animación de tarjetas al hacer scroll
 const cards = document.querySelectorAll(".card");
