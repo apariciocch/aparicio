@@ -118,24 +118,23 @@ nav a:hover {
 }
 
 /* JUEGO - EL CASTILLO */
-* { margin:0; padding:0; box-sizing:border-box; }
-#wrap { width:100%; max-width:680px; flex: 1; }
-#hud { display:flex; justify-content:space-between; align-items:center; padding:8px 16px; background:#06060c; border:1px solid #1a1a32; border-bottom:none; border-radius:8px 8px 0 0; }
+#wrap { width:100%; max-width:680px; flex: 1; margin: 0; padding: 0; }
+#hud { display:flex; justify-content:space-between; align-items:center; padding:8px 16px; background:#06060c; border:1px solid #1a1a32; border-bottom:none; border-radius:8px 8px 0 0; margin: 0; }
 #roomName { color:#ccccff; font-size:12px; font-weight:500; }
-#dots { display:flex; gap:5px; }
-.dot { width:7px; height:7px; border-radius:50%; background:#111128; border:1px solid #2a2a55; transition:all 0.4s; }
+#dots { display:flex; gap:5px; margin: 0; padding: 0; }
+.dot { width:7px; height:7px; border-radius:50%; background:#111128; border:1px solid #2a2a55; transition:all 0.4s; margin: 0; padding: 0; }
 .dot.done   { background:#4444aa; border-color:#7777cc; }
 .dot.active { background:#9999ff; border-color:#ccccff; }
-#c { display:block; width:100%; border:1px solid #1a1a32; image-rendering:pixelated; }
-#panel { background:#06060c; border:1px solid #1a1a32; border-top:none; padding:14px 20px; border-radius:0 0 8px 8px; min-height:72px; }
+#c { display:block; width:100%; border:1px solid #1a1a32; image-rendering:pixelated; margin: 0; padding: 0; }
+#panel { background:#06060c; border:1px solid #1a1a32; border-top:none; padding:14px 20px; border-radius:0 0 8px 8px; min-height:72px; margin: 0; }
 #pact { font-size:10px; color:#444488; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px; }
-#pq   { font-size:13px; color:#bbbbee; line-height:1.6; white-space:pre-line; }
-#ph   { font-size:11px; color:#333366; margin-top:6px; }
+#pq   { font-size:13px; color:#bbbbee; line-height:1.6; white-space:pre-line; margin: 0; padding: 0; }
+#ph   { font-size:11px; color:#333366; margin-top:6px; margin: 0; padding: 0; }
 #ctrl { display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; padding:8px 0 0; max-width:200px; margin:0 auto; }
-#restart-wrap { text-align:center; padding:6px 0 0; }
+#restart-wrap { text-align:center; padding:6px 0 0; margin: 0; }
 #btnRestart { background:#0c0c1e; color:#5555aa; border:1px solid #222244; padding:9px 28px; font-size:12px; cursor:pointer; border-radius:6px; font-family:monospace; transition:all 0.08s; display:none; }
 #btnRestart:hover { background:#181838; border-color:#5555aa; color:#ccccff; }
-.btn { background:#0c0c1e; color:#7777aa; border:1px solid #222244; padding:12px 0; font-size:16px; cursor:pointer; border-radius:6px; user-select:none; touch-action:manipulation; text-align:center; -webkit-user-select:none; transition:all 0.08s; font-family:monospace; }
+.btn { background:#0c0c1e; color:#7777aa; border:1px solid #222244; padding:12px 0; font-size:16px; cursor:pointer; border-radius:6px; user-select:none; touch-action:manipulation; text-align:center; -webkit-user-select:none; transition:all 0.08s; font-family:monospace; margin: 0; }
 .btn:active,.btn.on { background:#181838; border-color:#5555aa; color:#ccccff; }
 .empty { background:transparent!important; border-color:transparent!important; pointer-events:none; }
 
